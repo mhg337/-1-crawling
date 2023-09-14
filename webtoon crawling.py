@@ -1,3 +1,6 @@
+
+#네이버 웹툰의 실시간 인기웹툰 정보를 크롤링하는 코드를 만들려고 했습니다.
+
 # 라이브러리 준비
 import csv
 import requests
@@ -31,3 +34,6 @@ for cartoon in cartoons:
   data = [str(i), title]
   writer.writerow(data)
   i += 1
+
+#하지만 26,27번째 줄에서 cartoonsBox 함수에 값이 None으로 뜨면서 find_all 부분에서 오류가 계속 발생하여 ul이나 span이라는 요소가 있는지 class속성을 제대로 입력하였는지
+#계속 확인하였지만 결국 해결되지 않아 다른 코드로 시도해 보았지만 어떤 원인이 에러를 야기하는지 발견하지 못해 이론만 이해하고 실제로 크롤링을 해보지는 못했습니다.
