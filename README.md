@@ -35,9 +35,38 @@
 
 3. 목표 사이트에 접근하기 위해 작성한 코드 & 수정
 
+-빈 파일을 만들고 크롤링을 한 후 파일 안에 크롤링한 데이터를 넣어서 네이버 윕툰 인기 순위 데이터를 가져오는 코드
 
+      import csv
+      import requests
+      from bs4 import BeautifulSoup
 
-4. 최종
+      url ="https://comic.naver.com/index"
+
+      filename = "네이버 웹툰 인기 순위.csv"
+      f = open(filename, "w", encoding="utf-8-sig", newline="")
+      writer = csv.writer(f)
+
+      columns_name = ["순위", "웹툰명"]
+
+      writer.writerow(columns_name)
+
+      res = requests.get(url)
+      res.raise_for_status()
+
+      soup = BeautifulSoup(res.text, "lxml")
+      cartoonsBox = soup.find('ul', attrs={"class": "AsideList__content_list--FXDvm"})
+      cartoons = cartoonsBox.find_all('span')
+      i = 1
+
+      for cartoon in cartoons: 
+          title = cartoon.get("span.text") 
+          print(f"{str(i)}위: {title}")
+          data = [str(i), title]
+          writer.writerow(data)
+          i += 1
+
+5. 최종
 
 
 
